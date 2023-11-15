@@ -22,10 +22,7 @@ def import_job_data(csv_file_path):
             site=row['site'],
             title=row['title'],
             company=row['company'],
-            location=row['location'],
-            jobType=row['job_type'] if not pd.isna(row['job_type']) else None,
-            datePosted=posted_date,
-            interval=row['interval']
+            location=row['location']
         )
 
 

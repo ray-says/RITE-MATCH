@@ -2,7 +2,7 @@ from django.db import models
 
 
 class JobPosting(models.Model):
-    jobUrl = models.URLField(unique=True)
+    jobUrl = models.URLField()
     site = models.CharField(max_length=255, null=True)
     title = models.CharField(max_length=255, null=True)
     company = models.CharField(max_length=255, null=True)
