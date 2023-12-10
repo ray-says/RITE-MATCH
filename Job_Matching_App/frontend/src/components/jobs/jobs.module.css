@@ -1,126 +1,47 @@
-.index {
-    background-color: #f7f1f0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .index .div {
-    background-color: #f7f1f0;
-    height: 1024px;
-    overflow: hidden;
-    position: relative;
-    width: 1440px;
-  }
-  
-  .index .rectangle {
-    background-color: #f7f1f0;
-    height: 101px;
-    left: -1px;
-    position: absolute;
-    top: 0;
-    width: 1440px;
-  }
-  
-  .index .rectangle-2 {
-    background-color: #a15c38;
-    height: 112px;
-    left: 0;
-    position: absolute;
-    top: 912px;
-    width: 1440px;
-  }
-  
-  .index .overlap-group {
-    height: 638px;
-    left: 156px;
-    position: absolute;
-    top: 194px;
-    width: 1124px;
-  }
-  
-  .index .img {
-    background-blend-mode: luminosity;
-    height: 638px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 653px;
-  }
-  
-  .index .rectangle-3 {
-    background-color: #ffffff;
-    box-shadow: 0px 4px 4px #00000040;
-    height: 630px;
-    left: 649px;
-    position: absolute;
-    top: 0;
-    width: 475px;
-  }
-  
-  .index .text-wrapper {
-    color: #000000;
-    font-family: "Jockey One", Helvetica;
-    font-size: 30px;
-    font-weight: 400;
-    left: 693px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 260px;
-  }
-  
-  .index .text-wrapper-2 {
-    color: #000000;
-    font-family: "Jockey One", Helvetica;
-    font-size: 30px;
-    font-weight: 400;
-    left: 693px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 140px;
-  }
-  
-  .index .rectangle-4 {
-    height: 68px;
-    left: 689px;
-    position: absolute;
-    top: 184px;
-    width: 394px;
-  }
-  
-  .index .rectangle-5 {
-    background-color: #d9d9d9;
-    box-shadow: 0px 4px 4px #00000040;
-    height: 60px;
-    left: 693px;
-    position: absolute;
-    top: 303px;
-    width: 386px;
-  }
-  
-  .index .rectangle-6 {
-    background-color: #d9d9d9;
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px #00000040;
-    height: 57px;
-    left: 800px;
-    position: absolute;
-    top: 405px;
-    width: 172px;
-  }
-  
-  .index .text-wrapper-3 {
-    color: #000000;
-    font-family: "Jockey One", Helvetica;
-    font-size: 30px;
-    font-weight: 400;
-    left: 855px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 412px;
-  }
-  
+.jobcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin: auto;
+  background-color: white;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.jobcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+.jobcard h6 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.jobcard p {
+  color: #666;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.dark {
+  background-color: #1E1E1E;
+  color: white;
+}
+
+.iconButton {
+  position: absolute;
+  background-color: transparent;
+  color: #333; /* Change the color to your preferred color */
+  transition: color 0.3s ease-in-out;
+}
+
+.iconButton:hover {
+  color: #ff5722; /* Change the hover color to your preferred color */
+}

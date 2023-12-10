@@ -9,7 +9,7 @@ import { useTheme } from "../layout/ThemeContext";
 
 
 const Footer = (props) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme} = useTheme();
   const currentYear = new Date().getFullYear();
 
   const footerClass = `${styles.footer} ${theme === "light" ? styles.light : styles.dark}`;
