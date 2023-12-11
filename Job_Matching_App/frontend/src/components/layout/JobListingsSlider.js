@@ -49,8 +49,8 @@ const JobListingsSlider = () => {
                   width: "100%",
                   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
                   borderRadius: "18px",
-                  backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
-                  color: theme === "light" ? "white" : "#03DAC5"
+                  backgroundColor: theme === "light" ? "white" : "#1E1E1E",
+                  color: theme === "light" ? "black" : "#03DAC5"
                 }}
                 elevation={3}
               >

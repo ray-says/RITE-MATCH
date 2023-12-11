@@ -84,14 +84,14 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
 `;
 
   useEffect(() => {
-    const savedPage = localStorage.getItem("jobsPage");
-    if (savedPage) {
-      setCurrentPage(parseInt(savedPage)); // Set the current page from local storage
-    } else {
-      // If no page is saved, set it to the defaultPage
-      setCurrentPage(defaultPage);
-    }
-    // setCurrentPage(defaultPage);
+    // const savedPage = localStorage.getItem("jobsPage");
+    // if (savedPage) {
+    //   setCurrentPage(parseInt(savedPage)); // Set the current page from local storage
+    // } else {
+    //   // If no page is saved, set it to the defaultPage
+    //   setCurrentPage(defaultPage);
+    // }
+    setCurrentPage(defaultPage);
     setIsLoading(true);
     let timeoutId = null;
 
@@ -121,7 +121,7 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, []);
+  }, [defaultPage]);
 
   //   const handleJobClick = (jobUrl) => {
   //     // Save the current state to local storage
@@ -147,15 +147,27 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
   }
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box sx={{ padding: 18 }}>
       <Typography variant="h4" gutterBottom>
         Job Listings
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {currentJobs.map((job) => (
           <Grid item xs={12} sm={6} md={4} key={job.id}>
             <Paper
-              className={`${classes.jobcard} ${themeStyle}`}
+              sx={{
+                height: "160px",
+                width: "100%",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
+                borderRadius: "18px",
+                transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 5px 12px rgba(0,0,0,0.2)',
+                },
+                backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+                color: theme === "light" ? "white" : "#03DAC5"
+              }}
               elevation={3}
               onClick={() => handleJobClick(job)}
               style={{ cursor: "pointer" }}
@@ -176,6 +188,20 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
         marginTop={2}
       >
         <Pagination
+          sx={{
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
+            borderRadius: "18px",
+            backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+            color: theme === "light" ? "white" : "#03DAC5",
+            "& .MuiPaginationItem-root": {
+              color: theme === "light" ? "white" : "#03DAC5",
+        
+              // Specific style for the active page number
+              "&.Mui-selected": {
+                color: theme === "light" ? "black" : "white",
+              },
+            }
+          }}
           className={themeStyle}
           count={Math.ceil(jobs.length / jobsPerPage)}
           page={currentPage}

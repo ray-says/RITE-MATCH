@@ -1,9 +1,17 @@
 import React from "react";
 import classes from "./UserLogin.module.css";
-import { TextField, Button, Link, Tooltip } from "@mui/material";
+import { TextField, Button, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "../layout/ThemeContext";
-import JobListingsSlider from '../layout/JobListingsSlider'
+import JobListingsSlider from "../layout/JobListingsSlider";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Snackbar, Alert, Slide } from "@mui/material";
+import axios from "axios";
+import { useUser } from "../layout/UserContext";
+
+function SlideTransition(props) {
+  return <Slide {...props} direction="down" />;
+}
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +19,9 @@ const UserLogin = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const { theme } = useTheme();
+  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
+  const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const themeStyle = theme === "light" ? classes.light : classes.dark;
 
@@ -20,20 +31,53 @@ const UserLogin = () => {
     setEmailError(false);
     setPasswordError(false);
 
-    if (email === "") {
+    if (!email) {
       setEmailError(true);
     }
-    if (password === "") {
+    if (!password) {
       setPasswordError(true);
     }
 
     if (email && password) {
-      console.log(email, password);
+      const loginData = {
+        email,
+        password,
+      };
+
+      axios
+        .post("http://127.0.0.1:8000/user/signin/", loginData)
+        .then((response) => {
+          console.log("User logged in:", response.data);
+          setUser(response.data.username);
+          setOpenSnackbar(true); // Open the Snackbar on successful login
+          setTimeout(() => {
+            navigate("/jobs"); // Navigate to jobs page after a delay
+          }, 500); // Adjust delay as needed
+        })
+        .catch((error) => {
+          console.error("Error during login:", error);
+          // Handle login error (e.g., show error message)
+        });
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
     <React.Fragment>
+       <Snackbar
+        open={openSnackbar}
+        autoHideDuration={1500} // Adjust duration as needed
+        onClose={handleCloseSnackbar}
+        TransitionComponent={SlideTransition} 
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+          Logged in successfully!
+        </Alert>
+      </Snackbar>
       <section className={`${classes.user} ${themeStyle}`}>
         <h2 style={{ color: theme === "light" ? "#273746" : "#03DAC5" }}>
           We missed you :/
@@ -138,19 +182,20 @@ const UserLogin = () => {
           }}
         >
           Need an account?{" "}
-          <Link
-            href="/signup"
-            underline="hover"
+          <RouterLink
+            to="/signup"
             style={{
               color: theme === "light" ? "#273746" : "#03DAC5",
               fontFamily: "'Roboto', sans-serif",
+              textDecoration: "underline",
+              cursor: "pointer",
             }}
           >
             Register Here
-          </Link>
+          </RouterLink>
         </small>
       </section>
-      <JobListingsSlider/>
+      <JobListingsSlider />
     </React.Fragment>
   );
 };
