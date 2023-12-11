@@ -1,2 +1,36 @@
-.idea
-/venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+build/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# dotenv
+.env
+.env.test
+
+# virtualenv
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# Database
+*.sqlite3
+*.db
