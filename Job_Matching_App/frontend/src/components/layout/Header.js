@@ -12,20 +12,21 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <header className={headerClass}>
-      <h1 style={{ color: theme === "light" ? "white" : "#03DAC5" }}>Jobs.com</h1>
+      <h1 style={{ color: theme === "light" ? "white" : "#03DAC5" , marginLeft:"25px" }}>Jobs.com</h1>
       <Tooltip title={`Toggle ${theme === "light" ? "dark" : "light"} mode`} placement="bottom" arrow>
         <Button
           onClick={toggleTheme}
           sx={{
+            marginRight: '15px',
             borderRadius: '25%', 
             minWidth: '48px', 
             width: '48px', 
             height: '48px',
             padding: '0',
             color: theme === "light" ? "black" : "black",
-            backgroundColor: theme === "light" ? "#273746" : "#03DAC5",
+            backgroundColor: theme === "light" ? "#808B96" : "#03DAC5",
             '&:hover': {
-              backgroundColor: theme === "light" ? "#808B96" : "#808B96",
+              backgroundColor: theme === "light" ? "#273746" : "#808B96",
             },
             transform: "translateY(-1px)",
           }}

@@ -3,6 +3,7 @@ import classes from "./UserLogin.module.css";
 import { TextField, Button, Link, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "../layout/ThemeContext";
+import JobListingsSlider from '../layout/JobListingsSlider'
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -149,6 +150,7 @@ const UserLogin = () => {
           </Link>
         </small>
       </section>
+      <JobListingsSlider/>
     </React.Fragment>
   );
 };
