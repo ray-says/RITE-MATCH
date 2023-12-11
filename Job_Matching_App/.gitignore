@@ -34,3 +34,5 @@ venv.bak/
 # Database
 *.sqlite3
 *.db
+
+frontend/
