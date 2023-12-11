@@ -60,7 +60,7 @@ class UserSignIn(APIView):
         user = authenticate(username=user.username, password=password)
         if user is not None:
             # Login successful
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Login successful', 'username': user.username}, status=status.HTTP_200_OK)
         else:
             # Authentication failed
             return Response({'error': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
