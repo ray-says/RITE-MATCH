@@ -1,15 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.css";
 import { useTheme } from "../layout/ThemeContext";
 import MoonIcon from "../icons/MoonIcon";
 import SunIcon from "../icons/SunIcon";
-import {
-  Button,
-  Tooltip
-} from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useUser } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert, Slide } from "@mui/material";
+import Logo_light from "../../../src/assets/logo_ligt.png";
+import Logo_dark from "../../../src/assets/logo_dar.png";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 function SlideTransition(props) {
   return <Slide {...props} direction="down" />;
@@ -20,12 +21,11 @@ const Header = ({ username }) => {
   const { theme, toggleTheme } = useTheme();
   const { user, setUser } = useUser();
   const navigate = useNavigate();
-  
 
   const handleLogout = () => {
     console.log("User logged out");
     setUser(null);
-    setOpenSnackbar(true); 
+    setOpenSnackbar(true);
     navigate("/login");
   };
 
@@ -40,19 +40,68 @@ const Header = ({ username }) => {
   return (
     <React.Fragment>
       <header className={headerClass}>
-        <h1
-          style={{
-            color: theme === "light" ? "white" : "#03DAC5",
-            marginLeft: "25px",
-          }}
-        >
-          Jobs.com
-        </h1>
+        {theme == "light" ? (
+          <img
+            src={Logo_dark}
+            alt="Company Logo"
+            style={{ height: "50px", marginLeft: "10px" }}
+          />
+        ) : (
+          <img
+            src={Logo_light}
+            alt="Company Logo"
+            style={{ height: "50px", marginLeft: "10px" }}
+          />
+        )}
+        <NavLink to="/" className={styles.navLink}>
+          <p
+            style={{
+              fontSize: "17px",
+              fontWeight: "800",
+              color: theme === "light" ? "white" : "#03DAC5",
+            }}
+          >
+            Resume Builder
+          </p>
+        </NavLink>
+        <NavLink to="/" className={styles.navLink}>
+          <p
+            style={{
+              fontSize: "17px",
+              fontWeight: "800",
+              color: theme === "light" ? "white" : "#03DAC5",
+            }}
+          >
+            Job Seeker
+          </p>
+        </NavLink>
+        <NavLink to="/" className={styles.navLink}>
+          <p
+            style={{
+              fontSize: "17px",
+              fontWeight: "800",
+              color: theme === "light" ? "white" : "#03DAC5",
+            }}
+          >
+            Employers
+          </p>
+        </NavLink>
+        <NavLink to="/" className={styles.navLink}>
+          <p
+            style={{
+              fontSize: "17px",
+              fontWeight: "800",
+              color: theme === "light" ? "white" : "#03DAC5",
+            }}
+          >
+            Collaborate
+          </p>
+        </NavLink>
         {user && (
           <Tooltip title="Logout" placement="bottom" arrow>
             <Button
               sx={{
-                marginLeft: "1203px",
+                marginLeft: "30rem",
                 borderRadius: "25%",
                 minWidth: "48px",
                 width: "48px",
@@ -96,7 +145,7 @@ const Header = ({ username }) => {
           <Button
             onClick={toggleTheme}
             sx={{
-              marginRight: "15px",
+              marginRight: "10px",
               borderRadius: "25%",
               minWidth: "48px",
               width: "48px",
@@ -119,10 +168,14 @@ const Header = ({ username }) => {
         open={openSnackbar}
         autoHideDuration={1500}
         onClose={handleCloseSnackbar}
-        TransitionComponent={SlideTransition} 
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        TransitionComponent={SlideTransition}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           Logged out successfully!
         </Alert>
       </Snackbar>

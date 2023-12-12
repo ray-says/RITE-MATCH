@@ -80,7 +80,7 @@ const UserLogin = () => {
       </Snackbar>
       <section className={`${classes.user} ${themeStyle}`}>
         <h2 style={{ color: theme === "light" ? "#273746" : "#03DAC5" }}>
-          We missed you :/
+          We missed you &#x1FAE3;
         </h2>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <TextField

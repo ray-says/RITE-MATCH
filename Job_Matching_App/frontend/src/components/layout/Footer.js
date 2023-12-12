@@ -31,7 +31,7 @@ const Footer = (props) => {
             Support
           </Link>
           <Link href="#" sx={{ mx: 2, color: theme === "light" ? "white" : "#03DAC5"  }}>
-            Carrers
+            Careers
           </Link>
         </Grid>
         <Grid item xs={12}> 
@@ -53,7 +53,7 @@ const Footer = (props) => {
             variant="body2"
             sx={{ display: { xs: "none", sm: "block"}, color: theme === "light" ? "white" : "#03DAC5" }}
           >
-            Copyright © {currentYear} JobMatch. All rights reserved.
+            Copyright © {currentYear} RiteMatch. All rights reserved.
           </Typography>
         </Grid>
         </Grid>

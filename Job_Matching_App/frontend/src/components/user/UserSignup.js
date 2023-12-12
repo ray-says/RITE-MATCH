@@ -130,7 +130,7 @@ const UserSignup = () => {
       </Snackbar>
       <section className={`${classes.user} ${themeStyle}`}>
         <h2 style={{ color: theme === "light" ? "#273746" : "#03DAC5" }}>
-          Let's find a job match for you!
+          Let's find a job match for you &#x1F642;
         </h2>
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
