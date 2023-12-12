@@ -9,4 +9,6 @@ class JobsSerializer(serializers.ModelSerializer):
                   'site',
                   'title',
                   'company',
-                  'location')
+                  'location',
+                  'description'
+                  )
