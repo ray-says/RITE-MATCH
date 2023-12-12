@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobs.apps.JobsConfig',
     'user',
+    'matchScore',
     'django_countries',
     'corsheaders',
     'rest_framework',

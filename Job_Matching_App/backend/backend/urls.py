@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jobs.urls')),
     path('user/', include('user.urls')),
+    path('match/', include('matchScore.urls')),
 ]
 

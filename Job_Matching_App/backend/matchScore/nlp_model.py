@@ -26,7 +26,8 @@ def process_skills(user_skills):
 
     # Normalize the scores to convert them into percentages
     max_score = max(job_similarity_scores)
-    normalized_scores = [(score / max_score) * 100 for score in job_similarity_scores]
+    # normalized_scores = [(score / max_score) * 100 for score in job_similarity_scores]
+    normalized_scores = [round((score / max_score) * 100, 2) for score in job_similarity_scores]
 
     # Creating a DataFrame for normalized similarity scores
     similarity_scores = pd.DataFrame(normalized_scores, columns=['eligibility_percentage'])
@@ -34,10 +35,14 @@ def process_skills(user_skills):
     # Combining scores with the original data
     result = pd.concat([data, similarity_scores], axis=1)
 
+    result.fillna(value={'eligibility_percentage': 0}, inplace=True)  # Example: setting NaN eligibility percentages to 0
+
+    result.dropna(inplace=True)
+
     # Sorting by similarity score in descending order
     sorted_result = result.sort_values(by='eligibility_percentage', ascending=False)
 
     # Select relevant information to return
-    top_matches = sorted_result[['title', 'company', 'eligibility_percentage']].head().to_dict(orient='records')
+    top_matches = sorted_result[['title', 'company', 'job_url', 'location', 'eligibility_percentage']].to_dict(orient='records')
 
     return top_matches
