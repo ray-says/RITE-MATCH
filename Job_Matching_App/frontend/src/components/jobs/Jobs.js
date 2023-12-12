@@ -13,11 +13,12 @@ import {
   DialogActions,
   Button,
   IconButton,
+  Tooltip
 } from "@mui/material";
 import { useTheme } from "../layout/ThemeContext";
 import { Close as CloseIcon } from "@mui/icons-material";
 import classes from "./Jobs.module.css";
-
+import {Link} from "react-router-dom";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -28,7 +29,6 @@ const Jobs = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const jobsPerPage = 9;
-
 
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -50,38 +50,6 @@ const Jobs = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-
-  const dummyJobDescription = `
-We are seeking a highly motivated and skilled Software Engineer to join our dynamic team at XYZ Tech Solutions. As a Software Engineer, you will play a crucial role in designing, developing, and maintaining cutting-edge software applications that power our business and delight our customers.
-
-Key Responsibilities:
-1. Collaborate with cross-functional teams to understand project requirements and objectives.
-2. Design, develop, test, and deploy high-quality software solutions using modern programming languages and frameworks.
-3. Debug and resolve software defects and issues, ensuring optimal performance and reliability.
-4. Participate in code reviews and provide constructive feedback to peers.
-5. Stay up-to-date with industry trends and emerging technologies to continuously improve our software development practices.
-6. Contribute to the development of technical documentation, including design specifications, user manuals, and API documentation.
-7. Work closely with product managers to translate business requirements into technical specifications.
-8. Troubleshoot and resolve complex software integration issues and ensure seamless system interactions.
-9. Collaborate with quality assurance teams to ensure software quality and reliability.
-10. Maintain and enhance existing software systems by identifying areas for improvement and implementing updates.
-
-Qualifications:
-- Bachelor's degree in Computer Science, Software Engineering, or a related field.
-- Proven experience in software development, with a strong portfolio of projects.
-- Proficiency in one or more programming languages, such as Python, Java, C++, or JavaScript.
-- Experience with web development frameworks, databases, and cloud technologies.
-- Strong problem-solving skills and attention to detail.
-- Excellent communication and teamwork abilities.
-- Ability to work in a fast-paced and collaborative environment.
-
-Why Join Us:
-At XYZ Tech Solutions, we offer a dynamic and innovative work environment where you can make a significant impact and grow your career. You will have the opportunity to work on exciting projects, collaborate with talented professionals, and continuously expand your skill set. We value diversity, creativity, and excellence, and we are committed to providing our employees with a rewarding and fulfilling experience.
-
-If you are passionate about software development, enjoy solving complex problems, and are looking for a challenging and rewarding career, we encourage you to apply. Join us in shaping the future of technology and making a difference in the world.
-
-XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.
-`;
 
   useEffect(() => {
     // const savedPage = localStorage.getItem("jobsPage");
@@ -148,9 +116,34 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
 
   return (
     <Box sx={{ padding: 18 }}>
-      <Typography variant="h4" gutterBottom>
-        Job Listings
-      </Typography>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h6" marginBottom={3} sx={{
+          color: theme === "light" ? "#273746;" : "#03DAC5",
+        }}>
+          Job Listings
+        </Typography>
+        <Typography variant="h6" marginBottom={3}>
+        <Tooltip title="Check your Job Score" placement="top" arrow>
+          <Button
+          component={Link}
+          to="/jobscore"
+            sx={{
+              textTransform: "capitalize",
+              borderRadius: "10px",
+              fontSize: "18px",
+              color: theme === "light" ? "#273746;" : "#03DAC5",
+              "&:hover": {
+                backgroundColor: theme === "light" ? "#808B96" : "#00C7B3",
+                color: theme === "light" ? "white" : "#1E1E1E",
+              },
+              // backgroundColor: theme === "light" ? "#808B96" : "#03DAC5",
+            }}
+          >
+            Job Score
+          </Button>
+          </Tooltip>
+        </Typography>
+      </div>
       <Grid container spacing={3}>
         {currentJobs.map((job) => (
           <Grid item xs={12} sm={6} md={4} key={job.id}>
@@ -160,13 +153,14 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
                 width: "100%",
                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
                 borderRadius: "18px",
-                transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: '0 5px 12px rgba(0,0,0,0.2)',
+                transition:
+                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 5px 12px rgba(0,0,0,0.2)",
                 },
                 backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
-                color: theme === "light" ? "white" : "#03DAC5"
+                color: theme === "light" ? "white" : "#03DAC5",
               }}
               elevation={3}
               onClick={() => handleJobClick(job)}
@@ -195,12 +189,12 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
             color: theme === "light" ? "white" : "#03DAC5",
             "& .MuiPaginationItem-root": {
               color: theme === "light" ? "white" : "#03DAC5",
-        
+
               // Specific style for the active page number
               "&.Mui-selected": {
                 color: theme === "light" ? "black" : "white",
               },
-            }
+            },
           }}
           className={themeStyle}
           count={Math.ceil(jobs.length / jobsPerPage)}
@@ -216,8 +210,20 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="job-description-dialog"
+        sx={{
+          borderRadius: "20px", // Set the desired border radius
+        }}
       >
-        <DialogTitle>
+        <DialogTitle
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontFamily: "Raleway, sans-serif",
+            fontWeight: "900",
+            backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+            color: theme === "light" ? "white" : "#03DAC5",
+          }}
+        >
           {selectedJob?.title}
           <IconButton
             className={classes.iconButton}
@@ -229,12 +235,45 @@ XYZ Tech Solutions is an equal opportunity employer. We celebrate diversity and 
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText>{dummyJobDescription}</DialogContentText>
+
+        <DialogContent
+          sx={{
+            backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+            color: theme === "light" ? "white" : "#03DAC5",
+          }}
+        >
+          <h3 style={{ marginTop: "-4px", fontWeight: "500" }}>
+            {selectedJob?.company}
+          </h3>
+          <h5 style={{ marginTop: "-10px", fontWeight: "200" }}>
+            {selectedJob?.location}
+          </h5>
+          <h4 style={{ fontWeight: "550" }}>About the Job </h4>
+          <DialogContentText
+            sx={{
+              backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+              color: theme === "light" ? "white" : "#03DAC5",
+            }}
+          >
+            <p style={{ textAlign: "justify" }}>{selectedJob?.description}</p>
+          </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions
+          sx={{
+            backgroundColor: theme === "light" ? "#808b96" : "#1E1E1E",
+            color: theme === "light" ? "white" : "#03DAC5",
+          }}
+        >
           <Button
-            color="primary"
+            sx={{
+              borderRadius: "10px",
+              color: theme === "light" ? "white" : "#03DAC5",
+              "&:hover": {
+                backgroundColor: theme === "light" ? "#1976D2" : "#00C7B3",
+                color: theme === "light" ? "white" : "#1E1E1E",
+              },
+              // backgroundColor: theme === "light" ? "#808B96" : "#03DAC5",
+            }}
             onClick={() => window.open(selectedJob?.jobUrl, "_blank")}
           >
             Visit Job

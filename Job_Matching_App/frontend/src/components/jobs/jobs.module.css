@@ -36,7 +36,6 @@
 }
 
 .iconButton {
-  position: absolute;
   background-color: transparent;
   color: #333; /* Change the color to your preferred color */
   transition: color 0.3s ease-in-out;
