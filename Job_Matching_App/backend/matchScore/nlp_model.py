@@ -8,12 +8,12 @@ def process_skills(user_skills):
     data = pd.read_csv('Cleaned_Jobs_Final.csv')  # Replace with the path to your CSV
 
     # Splitting the user input into individual skills and converting to lowercase
-    skills_list = [skill.strip().lower() for skill in user_skills.split(',')]
+    skills_list = [skill.lower() for skill in user_skills]
 
     # Combining user skills with job descriptions for vectorization
     combined_texts = data['cleaned_description'].tolist() + skills_list
 
-    # Vectorization using TF-IDF
+    # Vectorization using TF-IDFs
     vectorizer = TfidfVectorizer()
     tfidf_matrix = vectorizer.fit_transform(combined_texts)
 
